@@ -4,11 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:behaviors="using:NewHardwareinfo.Behaviors" 
+    xmlns:behaviors="using:NewHardwareinfo.Behaviors" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls" xmlns:models="using:NewHardwareinfo.Models" d:DataContext="{d:DesignInstance Type=models:HardwareData}"
     behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
-        
+        <controls:DataGrid
+            x:Name="datagrid_temp"
+            AutoGenerateColumns="False"
+            GridLinesVisibility="Horizontal">
+            <controls:DataGrid.Resources>
+                <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundColor" Color="Transparent" />
+            </controls:DataGrid.Resources>
+            <controls:DataGrid.Columns>
+                <!-- TODO: Replace column definitions to match real data. Consider adding Header values to Resources.resw. -->
+                <controls:DataGridTextColumn Binding="{Binding TemperatureName}" Header="Sensor" />
+                <controls:DataGridTextColumn Binding="{Binding Temperature}" Header="Temperature(℃)" />
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
     </Grid>
 </Page>

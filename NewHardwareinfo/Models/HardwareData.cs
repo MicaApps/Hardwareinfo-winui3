@@ -88,5 +88,37 @@ public class HardwareData:INotifyPropertyChanged
             return _gpuload;
         }
     }
+    private string _TemperatureName;
+    public string TemperatureName
+    {
+        set
+        {
+            _TemperatureName = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("TemperatureName"));
+            }
+        }
+        get
+        {
+            return _TemperatureName;
+        }
+    }
+    private float? _Temperature;
+    public float? Temperature
+    {
+        set
+        {
+            _Temperature = value;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("Temperature"));
+            }
+        }
+        get
+        {
+            return _Temperature;
+        }
+    }
     public event PropertyChangedEventHandler? PropertyChanged;
 }

@@ -42,6 +42,7 @@ public static class HardwareInfoService
     public static ObservableCollection<HardwareData> mem_source = new() { };
     public static ObservableCollection<HardwareData> gpu_source = new() { };
     public static ObservableCollection<HardwareData> temp_source = new() { };
+
     public static void TimerUpdate()
     {
         timer.Interval = TimeSpan.FromSeconds(1);
@@ -66,6 +67,16 @@ public static class HardwareInfoService
                         {
                             samp.Content += sensor.Name + ": " + sensor.Value + " ℃" + "\n";
                             Tempt += "                " + sensor.Name + ": " + sensor.Value + " ℃\n";
+                            //
+                            var tf = temp_source.FirstOrDefault(t => t.TemperatureName == hardware.Name+"."+sensor.Name);
+                            if (tf != null)
+                            {
+                                tf.Temperature = sensor.Value;
+                            }
+                            else
+                            {
+                                temp_source.Add(new HardwareData() { TemperatureName= hardware.Name + "." + sensor.Name ,Temperature=sensor.Value});
+                            }
                         }
                         else
                         {
@@ -80,6 +91,16 @@ public static class HardwareInfoService
                     {
                         samp.Content += sensor.Name + ": " + sensor.Value + " ℃" + "\n";
                         Tempt += "                " + sensor.Name + ": " + sensor.Value + " ℃\n";
+                        //
+                        var tf = temp_source.FirstOrDefault(t => t.TemperatureName == hardware.Name + "." + sensor.Name);
+                        if (tf != null)
+                        {
+                            tf.Temperature = sensor.Value;
+                        }
+                        else
+                        {
+                            temp_source.Add(new HardwareData() { TemperatureName = hardware.Name + "." + sensor.Name, Temperature = sensor.Value });
+                        }
                     }
                     else
                     {
@@ -171,11 +192,6 @@ public static class HardwareInfoService
                 else
                     source2.Add(source[SeletedIndex]);
             }
-            var d6 = new HardwareData() { Content = Tempt };
-            if (temp_source.Count > 0)
-                temp_source[0] = d6;
-            else
-                temp_source.Add(d6);
         };
         timer.Start();
     }
