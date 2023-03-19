@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "NewHardwareinfo (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "NewHardwareinfo (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+}
